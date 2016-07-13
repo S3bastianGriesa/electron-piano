@@ -1,5 +1,23 @@
 window.onkeydown = function (e) {
   var id = getIdForWhiteKey(e.key);
+
+  //start recording  
+  if (e.key === 'a') {
+    if(!recorder.isBusy())
+      recorder.startNewRecord();
+
+  }
+
+  if (e.key === 'f') {
+    recorder.finishRecord();
+    console.log(recorder.currentRecord);
+  }
+
+  if (e.key === 'k') {
+    if(!recorder.isBusy())
+    recorder.play();
+  }
+
   if (id !== -1) {
     piano.pushWhiteKey(id);
   } 
