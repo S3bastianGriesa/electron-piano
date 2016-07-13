@@ -9,6 +9,9 @@ piano.initialize = function initialize(x, y, width, height, keys, audioNoteMap) 
   piano.pushed = [piano.keys];
   piano.clearPushedKeys();
   piano.audioNoteMap = audioNoteMap;
+  piano.minOctave = 1;
+  piano.maxOctave = 6;
+  piano.currentOctave = 3;
 }
 
 piano.draw = function draw() {
@@ -18,7 +21,6 @@ piano.draw = function draw() {
 
 piano.refresh = function refresh() {
   piano.draw();
-  //piano.play();
 }
 
 piano.pushKey = function pushKey(x) {
@@ -28,36 +30,87 @@ piano.pushKey = function pushKey(x) {
   piano.pushed[x] = true;
 }
 
-piano.playKey = function playKey(x) {
-  var key = null;
+piano.playWhiteKey = function playWhiteKey(key) {
 
-  switch (x) {
+  var keySound = null;
 
+  switch(key) {
     case 0:
-      key = piano.audioNoteMap.C3;
-      break;
+    case 7:
+    keySound = 'C';
+    break;
     case 1:
-      key = piano.audioNoteMap.D3;
-      break;
+    case 8:
+    keySound = 'D';
+    break;
     case 2:
-      key = piano.audioNoteMap.E3;
-      break;
+    case 9:
+    keySound = 'E';
+    break;
     case 3:
-      key = piano.audioNoteMap.F3;
-      break;
+    case 10:
+    keySound = 'F';
+    break;
     case 4:
-      key = piano.audioNoteMap.G3;
-      break;
+    case 11:
+    keySound = 'G';
+    break;
     case 5:
-      key = piano.audioNoteMap.A3;
-      break;
+    case 12:
+    keySound = 'A';
+    break;
     case 6:
-      key = piano.audioNoteMap.B3;
-      break;
-
+    case 13:
+    keySound = 'B';
+    break;
   }
 
-  if (key !== null) {
+  if(key < 8) {
+    keySound = keySound + piano.currentOctave;
+  } else {
+    keySound = keySound + piano.currentOctave + 1;
+  }
+
+  if(keySound !== null) {
+    key.currentTime = 0;
+    key.play();
+  }
+}
+
+piano.playBlackKey = function playBlackKey(key) {
+
+  var keySound = null;
+
+  switch(key) {
+    case 0:
+    case 5:
+    keySound = 'Db';
+    break;
+    case 1:
+    case 6:
+    keySound = 'Eb';
+    break;
+    case 2:
+    case 7:
+    keySound = 'Gb';
+    break;
+    case 3:
+    case 8:
+    keySound = 'Ab';
+    break;
+    case 4:
+    case 9:
+    keySound = 'Bb';
+    break;
+  }
+
+  if(key < 5) {
+    keySound = keySound + piano.currentOctave;
+  } else {
+    keySound = keySound + piano.currentOctave + 1;
+  }
+
+  if(keySound !== null) {
     key.currentTime = 0;
     key.play();
   }
