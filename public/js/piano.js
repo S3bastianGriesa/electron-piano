@@ -6,7 +6,8 @@ piano.initialize = function initialize(x, y, width, height, keys, audioNoteMap) 
   piano.width = width;
   piano.height = height;
   piano.keys = keys;
-  piano.pushed = [piano.keys];
+  piano.pushedBlack = [(piano.keys/ (7 * 5))];
+  piano.pushed = [piano.keys.length];
   piano.clearPushedKeys();
   piano.audioNoteMap = audioNoteMap;
   piano.minOctave = 1;
@@ -16,103 +17,114 @@ piano.initialize = function initialize(x, y, width, height, keys, audioNoteMap) 
 
 piano.draw = function draw() {
   graphics.clearScreen();
-  graphics.drawPiano(piano.x, piano.y, piano.width, piano.height, piano.keys, piano.pushed);
+  graphics.drawPiano(piano.x, piano.y, piano.width, piano.height, piano.keys, piano.pushed, piano.pushedBlack);
 }
 
 piano.refresh = function refresh() {
   piano.draw();
 }
 
-piano.pushKey = function pushKey(x) {
+piano.pushWhiteKey = function pushKey(x) {
   if (!piano.pushed[x]) {
-    piano.playKey(x);
+    piano.playWhiteKey(x);
   }
   piano.pushed[x] = true;
 }
 
+piano.pushBlackKey = function pushBlackKey(x) {
+  if (!piano.pushedBlack[x]) {
+    piano.playBlackKey(x);
+  }
+  piano.pushedBlack[x] = true;
+}
+
 piano.playWhiteKey = function playWhiteKey(key) {
 
-  var keySound = null;
+  var note = '';
 
   switch(key) {
     case 0:
     case 7:
-    keySound = 'C';
+    note = 'C';
     break;
     case 1:
     case 8:
-    keySound = 'D';
+    note = 'D';
     break;
     case 2:
     case 9:
-    keySound = 'E';
+    note = 'E';
     break;
     case 3:
     case 10:
-    keySound = 'F';
+    note = 'F';
     break;
     case 4:
     case 11:
-    keySound = 'G';
+    note = 'G';
     break;
     case 5:
     case 12:
-    keySound = 'A';
+    note = 'A';
     break;
     case 6:
     case 13:
-    keySound = 'B';
+    note = 'B';
     break;
   }
 
-  if(key < 8) {
-    keySound = keySound + piano.currentOctave;
+  if(key < 7) {
+    note = note + piano.currentOctave;
   } else {
-    keySound = keySound + piano.currentOctave + 1;
+    note = note + (piano.currentOctave + 1);
   }
 
-  if(keySound !== null) {
-    key.currentTime = 0;
-    key.play();
+  var audio = piano.audioNoteMap[note];
+
+  if(audio !== null && audio !== undefined) {
+    audio.currentTime = 0;
+    audio.play();
   }
 }
 
 piano.playBlackKey = function playBlackKey(key) {
 
-  var keySound = null;
+  var note = '';
 
   switch(key) {
     case 0:
     case 5:
-    keySound = 'Db';
+    note = 'Db';
     break;
     case 1:
     case 6:
-    keySound = 'Eb';
+    note = 'Eb';
     break;
     case 2:
     case 7:
-    keySound = 'Gb';
+    note = 'Gb';
     break;
     case 3:
     case 8:
-    keySound = 'Ab';
+    note = 'Ab';
     break;
     case 4:
     case 9:
-    keySound = 'Bb';
+    note = 'Bb';
     break;
   }
 
   if(key < 5) {
-    keySound = keySound + piano.currentOctave;
+    note = note + piano.currentOctave;
   } else {
-    keySound = keySound + piano.currentOctave + 1;
+    note = note + (piano.currentOctave + 1);
   }
 
-  if(keySound !== null) {
-    key.currentTime = 0;
-    key.play();
+  var audio = piano.audioNoteMap[note];
+
+  if(audio !== null && audio !== undefined) {
+    audio.currentTime = 0;
+    audio.play();
   }
 }
 
@@ -144,5 +156,8 @@ piano.play = function play() {
 piano.clearPushedKeys = function clearPushedKeys() {
   for (var i = 0; i < piano.pushed.length; i++) {
     piano.pushed[i] = false;
+  }
+  for (var i = 0; i < piano.pushedBlack.length; i++) {
+    piano.pushedBlack[i] = false;
   }
 }

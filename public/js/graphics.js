@@ -7,7 +7,7 @@ graphics.initializeGraphics = function initializeGraphics(width, height) {
   graphics.height = height;
 }
 
-graphics.drawPiano = function drawPiano(x, y, width, height, keys, pushed) {
+graphics.drawPiano = function drawPiano(x, y, width, height, keys, pushed, pushedBlack) {
   graphics.drawRectangleBorder(x, y, width, height);
   var whiteKeyWidth = Math.ceil(width / keys);
   var delta = Math.ceil(whiteKeyWidth * (3 / 4));
@@ -15,10 +15,10 @@ graphics.drawPiano = function drawPiano(x, y, width, height, keys, pushed) {
     //draw white keys
       graphics.drawWhiteKey(x, y, whiteKeyWidth, height, i, pushed[i]);
   }
-
+  graphics.blackKeyCounter = 0;
   for (var i = 0; i < keys; i++) {
     //draw black keys
-    graphics.drawBlackKey(x, y, whiteKeyWidth, delta, height, i);
+    graphics.drawBlackKey(x, y, whiteKeyWidth, delta, height, i, pushedBlack[graphics.blackKeyCounter]);
   }
   
 
@@ -47,9 +47,14 @@ graphics.drawWhiteKey = function drawWhiteKey(x, y, width, height, pos, pushed) 
   }
 }
 
-graphics.drawBlackKey = function drawBlackKey(x, y, width, delta, height, pos) {
-   if ((((pos + 1) % 7) % 3) !== 0 || ((pos + 1) % 7) == 6) { //<--- determines if we need a black key on current whitekeyposition
-     graphics.drawKey(Math.ceil(x + pos * width + delta), y, width / 2, Math.ceil(height * 0.7), 'black');
+graphics.drawBlackKey = function drawBlackKey(x, y, width, delta, height, pos, pushed) {
+  if ((((pos + 1) % 7) % 3) !== 0 || ((pos + 1) % 7) == 6) { //<--- determines if we need a black key on current whitekeyposition
+    graphics.blackKeyCounter++;
+    var color = 'black';
+     if (pushed) {
+       color = 'red';
+     }
+     graphics.drawKey(Math.ceil(x + pos * width + delta), y, width / 2, Math.ceil(height * 0.7), color);
     }
 }
 

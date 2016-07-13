@@ -26,7 +26,7 @@ $(document).ready(function () {
   }
 
   graphics.initializeGraphics(1220, 580);
-  piano.initialize(40, 200, 1110, 250, 17, audioNoteMap);
+  piano.initialize(40, 200, 1110, 250, 14, audioNoteMap);
   piano.draw();
 
 });
