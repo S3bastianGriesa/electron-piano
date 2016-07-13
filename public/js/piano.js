@@ -6,14 +6,15 @@ piano.initialize = function initialize(x, y, width, height, keys, audioNoteMap) 
   piano.width = width;
   piano.height = height;
   piano.keys = keys;
-  piano.pushed = [piano.keys];
+  piano.pushedBlack = [(piano.keys/ (7 * 5))];
+  piano.pushed = [piano.keys.length];
   piano.clearPushedKeys();
   piano.audioNoteMap = audioNoteMap;
 }
 
 piano.draw = function draw() {
   graphics.clearScreen();
-  graphics.drawPiano(piano.x, piano.y, piano.width, piano.height, piano.keys, piano.pushed);
+  graphics.drawPiano(piano.x, piano.y, piano.width, piano.height, piano.keys, piano.pushed, piano.pushedBlack);
 }
 
 piano.refresh = function refresh() {
@@ -21,14 +22,21 @@ piano.refresh = function refresh() {
   //piano.play();
 }
 
-piano.pushKey = function pushKey(x) {
+piano.pushWhiteKey = function pushKey(x) {
   if (!piano.pushed[x]) {
-    piano.playKey(x);
+    piano.playWhiteKey(x);
   }
   piano.pushed[x] = true;
 }
 
-piano.playKey = function playKey(x) {
+piano.pushBlackKey = function pushBlackKey(x) {
+  if (!piano.pushedBlack[x]) {
+    piano.playBlackKey(x);
+  }
+  piano.pushedBlack[x] = true;
+}
+
+piano.playWhiteKey = function playKey(x) {
   var key = null;
 
   switch (x) {
@@ -63,6 +71,10 @@ piano.playKey = function playKey(x) {
   }
 }
 
+piano.playBlackKey = function playBlackKey(x) {
+  var key = null;
+}
+
 piano.play = function play() {
   for (var i = 0; i < piano.pushed.length; i++) {
 
@@ -91,5 +103,8 @@ piano.play = function play() {
 piano.clearPushedKeys = function clearPushedKeys() {
   for (var i = 0; i < piano.pushed.length; i++) {
     piano.pushed[i] = false;
+  }
+  for (var i = 0; i < piano.pushedBlack.length; i++) {
+    piano.pushedBlack[i] = false;
   }
 }
