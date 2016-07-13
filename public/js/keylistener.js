@@ -1,6 +1,4 @@
 window.onkeydown = function (e) {
-  console.log('we have a key pressed: ');
-  console.log(e);
   var id = getIdForWhiteKey(e.key);
   if (id !== -1) {
     piano.pushWhiteKey(id);
@@ -12,8 +10,6 @@ window.onkeydown = function (e) {
 }
 
 window.onkeyup = function (e) {
-  console.log('we have a key released: ');
-  console.log(e);
   var id = getIdForWhiteKey(e.key);
   if (id !== -1) {
     piano.pushed[id] = false;
