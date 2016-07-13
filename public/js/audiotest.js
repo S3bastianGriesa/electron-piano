@@ -24,8 +24,4 @@ $(document).ready(function () {
       }
     }
   }
-
-  var file = audioNoteMap.C5;
-  file.currentTime = 0;
-  file.play();
 });
