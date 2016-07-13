@@ -1,17 +1,19 @@
 var graphics = {};
 
-graphics.initializeGraphics = function initializeGraphics() {
+graphics.initializeGraphics = function initializeGraphics(width, height) {
   graphics.canvas = document.getElementById('main');
   graphics.ctx = graphics.canvas.getContext('2d');
+  graphics.width = width;
+  graphics.height = height;
 }
 
-graphics.drawPiano = function drawPiano(x, y, width, height, keys) {
+graphics.drawPiano = function drawPiano(x, y, width, height, keys, pushed) {
   graphics.drawRectangleBorder(x, y, width, height);
   var whiteKeyWidth = Math.ceil(width / keys);
   var delta = Math.ceil(whiteKeyWidth * (3 / 4));
   for (var i = 0; i < keys; i++) {
     //draw white keys
-    graphics.drawWhiteKey(x, y, whiteKeyWidth, height, i);
+      graphics.drawWhiteKey(x, y, whiteKeyWidth, height, i, pushed[i]);
   }
 
   for (var i = 0; i < keys; i++) {
@@ -20,6 +22,10 @@ graphics.drawPiano = function drawPiano(x, y, width, height, keys) {
   }
   
 
+}
+
+graphics.clearScreen = function clearScreen() {
+  graphics.fillRect(0, 0, graphics.width, graphics.height, 'white');
 }
 
 graphics.drawRectangleBorder = function drawRectangleBorder(x, y, width, height) {
@@ -31,9 +37,14 @@ graphics.drawRectangleBorder = function drawRectangleBorder(x, y, width, height)
   graphics.ctx.stroke();
 }
 
-graphics.drawWhiteKey = function drawWhiteKey(x, y, width, height, pos) {
+graphics.drawWhiteKey = function drawWhiteKey(x, y, width, height, pos, pushed) {
   var keyX = Math.ceil(x + pos * width);
-  graphics.drawKey(keyX, y, width, height, 'white');
+  if (pushed) {
+    graphics.drawKey(keyX, y, width, height, 'yellow');
+  }
+  else {
+    graphics.drawKey(keyX, y, width, height, 'white');
+  }
 }
 
 graphics.drawBlackKey = function drawBlackKey(x, y, width, delta, height, pos) {
