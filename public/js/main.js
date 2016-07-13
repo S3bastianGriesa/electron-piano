@@ -56,6 +56,7 @@ $(document).ready(function () {
   var audioNoteMap = createAudioNoteMap('piano');
 
   graphics.initializeGraphics(1220, 580);
+  recorder.initialize();
   piano.initialize(40, 200, 1110, 250, 14, audioNoteMap);
   piano.draw();
 
