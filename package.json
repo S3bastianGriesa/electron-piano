@@ -1,0 +1,26 @@
+{
+  "name": "electron-piano",
+  "version": "1.0.0",
+  "description": "An electron piano",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/S3bastianGriesa/electron-piano.git"
+  },
+  "authors": [
+    "Julian Biermann",
+    "Sebastian Griesa"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/S3bastianGriesa/electron-piano/issues"
+  },
+  "homepage": "https://github.com/S3bastianGriesa/electron-piano#readme",
+  "dependencies": {
+    "electron": "^0.4.1"
+  }
+}
