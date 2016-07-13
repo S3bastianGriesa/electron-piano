@@ -12,6 +12,9 @@ graphics.drawPiano = function drawPiano(x, y, width, height, keys) {
   for (var i = 0; i < keys; i++) {
     //draw white keys
     graphics.drawWhiteKey(x, y, whiteKeyWidth, height, i);
+  }
+
+  for (var i = 0; i < keys; i++) {
     //draw black keys
     graphics.drawBlackKey(x, y, whiteKeyWidth, delta, height, i);
   }
@@ -29,11 +32,31 @@ graphics.drawRectangleBorder = function drawRectangleBorder(x, y, width, height)
 }
 
 graphics.drawWhiteKey = function drawWhiteKey(x, y, width, height, pos) {
-  graphics.drawRectangleBorder(Math.ceil(x + pos * width), y, width, height);
+  var keyX = Math.ceil(x + pos * width);
+  graphics.drawKey(keyX, y, width, height, 'white');
 }
 
 graphics.drawBlackKey = function drawBlackKey(x, y, width, delta, height, pos) {
    if ((((pos + 1) % 7) % 3) !== 0 || ((pos + 1) % 7) == 6) { //<--- determines if we need a black key on current whitekeyposition
-      graphics.ctx.fillRect(Math.ceil(x + pos * width + delta), y, width/2, Math.ceil(height * 0.7));
+     graphics.drawKey(Math.ceil(x + pos * width + delta), y, width / 2, Math.ceil(height * 0.7), 'black');
     }
+}
+
+graphics.drawKey = function drawKey(x, y, width, height, color) {
+  graphics.fillRect(x, y, width, height, color);
+  graphics.drawRectangleBorder(x, y, width, height);
+}
+
+graphics.fillRect = function fillRectBlack(x, y, width, height) {
+  graphics.ctx.beginPath();
+  graphics.ctx.rect(x, y, width, height);
+  graphics.ctx.fillStyle = "black";
+  graphics.ctx.fill();
+}
+
+graphics.fillRect = function fillRect(x, y, width, height, color) {
+  graphics.ctx.beginPath();
+  graphics.ctx.rect(x, y, width, height);
+  graphics.ctx.fillStyle = color;
+  graphics.ctx.fill();
 }
