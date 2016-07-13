@@ -1,5 +1,9 @@
 window.$ = window.jQuery = require('./js/jquery.min.js');
 
+function updateCurrentOctaveSpan (currentOctave) {
+  $('#currentOctave').empty().html(currentOctave);
+}
+
 $(document).ready(function () {
   var audioFilesUrl = './soundfont/acoustic_grand_piano-mp3/';
   var noteLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'Ab', 'Bb', 'Db', 'Eb', 'Gb'];
@@ -28,5 +32,23 @@ $(document).ready(function () {
   graphics.initializeGraphics(1220, 580);
   piano.initialize(40, 200, 1110, 250, 14, audioNoteMap);
   piano.draw();
+
+  $('#nextOctave').click(function(event) {
+    var nextOctave = piano.currentOctave + 1;
+
+    if(nextOctave <= piano.maxOctave) {
+      piano.currentOctave = nextOctave;
+      updateCurrentOctaveSpan(piano.currentOctave);
+    }
+  });
+
+  $('#previousOctave').click(function(event) {
+    var previousOctave = piano.currentOctave - 1;
+
+    if(piano.minOctave <= previousOctave) {
+      piano.currentOctave = previousOctave;
+      updateCurrentOctaveSpan(piano.currentOctave);
+    }
+  });
 
 });
