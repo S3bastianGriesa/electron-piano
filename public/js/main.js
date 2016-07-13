@@ -1,4 +1,5 @@
 function initializeApplication() {
   graphics.initializeGraphics();
-  graphics.drawPiano(40, 250, 1120, 250, 28);
+  piano.initialize(40, 200, 1120, 250, 28);
+  piano.draw();
 }

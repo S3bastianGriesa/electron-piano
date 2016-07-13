@@ -27,8 +27,3 @@ graphics.drawRectangleBorder = function drawRectangleBorder(x, y, width, height)
   graphics.ctx.lineTo(x, y);
   graphics.ctx.stroke();
 }
-
-graphics.drawBlackKey = function drawBlackKey() {
-  graphics.ctx.fillStyle = '#000000';
-  graphics.ctx.fillRect(0, 0, 20, 100);
-}
