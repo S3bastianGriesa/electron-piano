@@ -1,7 +1,7 @@
 window.onkeydown = function (e) {
   console.log('we have a key pressed: ');
   console.log(e);
-  piano.pushed[getIdForKey(e.key)] = true;
+  piano.pushKey(getIdForKey(e.key));
   piano.refresh();
 }
 
