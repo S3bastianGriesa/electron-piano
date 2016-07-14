@@ -22,11 +22,11 @@ window.onkeydown = function (e) {
 
   if (id !== -1) {
     piano.pushWhiteKey(id);
-    recorder.lastKey = e.key;
+    recorder.addNoteToRecord(e.key);
   } 
   else {
     piano.pushBlackKey(getIdForBlackKey(e.key));
-    recorder.lastKey = e.key;
+    recorder.addNoteToRecord(e.key);
   }
   piano.refresh();
 }

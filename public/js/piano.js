@@ -79,9 +79,6 @@ piano.playWhiteKey = function playWhiteKey(key) {
     note = note + (piano.currentOctave + 1);
   }
 
-  if(recorder.isRecording)    
-  recorder.addNoteToRecord(note);
-
   var audio = piano.audioNoteMap[note];
 
   if(audio !== null && audio !== undefined) {
@@ -122,9 +119,6 @@ piano.playBlackKey = function playBlackKey(key) {
   } else {
     note = note + (piano.currentOctave + 1);
   }
-
-  if(recorder.isRecording)  
-  recorder.addNoteToRecord(note);
 
   var audio = piano.audioNoteMap[note];
 

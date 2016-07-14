@@ -20,10 +20,9 @@ recorder.startNewRecord = function startNewRecord() {
   recorder.isRecording = true;
 }
 
-recorder.addNoteToRecord = function addNoteToRecord(note) {
+recorder.addNoteToRecord = function addNoteToRecord(key) {
   var newNote = {
-    value: note,
-    key: recorder.lastKey,
+    key: key,
     time: new Date().getTime() - recorder.currentRecord.startTime
   };
   if(recorder.isRecording)

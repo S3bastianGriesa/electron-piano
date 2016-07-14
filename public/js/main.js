@@ -89,10 +89,19 @@ $(document).ready(function () {
   
   $('#record').click(function(event) {
     if (!recorder.isRecording) {
-
+      startRecord();
     }
     else {
+      stopRecord();
+    }
+  });
 
+    $('#play').click(function(event) {
+    if (!recorder.isPlaying) {
+      play();
+    }
+    else {
+      stopPlay();
     }
   });
 
