@@ -39,22 +39,18 @@ recorder.finishRecord = function finishRecord() {
 }
 
 recorder.play = function play() {
-  recorder.isPlaying = true;
   for (var i = 0; i < recorder.currentRecord.notes.length; i++) {
     window.setTimeout(function (note) {
-      var audio = piano.audioNoteMap[note.value];
-      if (audio !== null && audio !== undefined) {
-        audio.currentTime = 0;
-        audio.play();
-        console.log(note);
-        jQuery.event.trigger({ type: 'keydown', which: note.key.charCodeAt(0), key: note.key });
-        window.setTimeout(function (key) {
-          jQuery.event.trigger({ type: 'keyup', which: key.charCodeAt(0), key: key });
-        }, 200, note.key);   
-      }
+      recorder.throwKeyEvent(note.key);
     }, recorder.currentRecord.notes[i].time, recorder.currentRecord.notes[i]);
 
   }  
-  recorder.isPlaying = false;
+}
+
+recorder.throwKeyEvent = function throwKeyEvent(key) {
+  jQuery.event.trigger({ type: 'keydown', which: key.charCodeAt(0), key: key });
+  window.setTimeout(function (key) {
+    jQuery.event.trigger({ type: 'keyup', which: key.charCodeAt(0), key: key });
+  }, 200, key);   
 }
     

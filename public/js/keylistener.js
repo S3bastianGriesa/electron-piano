@@ -1,28 +1,32 @@
 window.onkeydown = function (e) {
   var id = getIdForWhiteKey(e.key);
-  recorder.lastKey = e.key;
   //start recording  
   if (e.key === 'a') {
     if(!recorder.isBusy())
       recorder.startNewRecord();
+    return;
 
   }
 
   if (e.key === 'f') {
     recorder.finishRecord();
     console.log(recorder.currentRecord);
+    return;
   }
 
   if (e.key === 'k') {
     if(!recorder.isBusy())
-    recorder.play();
+      recorder.play();
+    return;
   }
 
   if (id !== -1) {
     piano.pushWhiteKey(id);
+    recorder.lastKey = e.key;
   } 
   else {
     piano.pushBlackKey(getIdForBlackKey(e.key));
+    recorder.lastKey = e.key;
   }
   piano.refresh();
 }
