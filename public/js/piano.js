@@ -27,7 +27,7 @@ piano.refresh = function refresh() {
 piano.pushWhiteKey = function pushKey(x, c) {
   if (!piano.pushed[x]) {
     piano.playWhiteKey(x);
-    recorder.addNoteToRecord(e.key);
+    recorder.addNoteToRecord(c);
   }
   piano.pushed[x] = true;
 }
@@ -35,7 +35,7 @@ piano.pushWhiteKey = function pushKey(x, c) {
 piano.pushBlackKey = function pushBlackKey(x, c) {
   if (!piano.pushedBlack[x]) {
     piano.playBlackKey(x);
-    recorder.addNoteToRecord(e.key);
+    recorder.addNoteToRecord(c);
   }
   piano.pushedBlack[x] = true;
 }
