@@ -24,16 +24,18 @@ piano.refresh = function refresh() {
   piano.draw();
 }
 
-piano.pushWhiteKey = function pushKey(x) {
+piano.pushWhiteKey = function pushKey(x, c) {
   if (!piano.pushed[x]) {
     piano.playWhiteKey(x);
+    recorder.addNoteToRecord(e.key);
   }
   piano.pushed[x] = true;
 }
 
-piano.pushBlackKey = function pushBlackKey(x) {
+piano.pushBlackKey = function pushBlackKey(x, c) {
   if (!piano.pushedBlack[x]) {
     piano.playBlackKey(x);
+    recorder.addNoteToRecord(e.key);
   }
   piano.pushedBlack[x] = true;
 }

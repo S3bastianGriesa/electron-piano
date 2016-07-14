@@ -21,12 +21,10 @@ window.onkeydown = function (e) {
   }
 
   if (id !== -1) {
-    piano.pushWhiteKey(id);
-    recorder.addNoteToRecord(e.key);
+    piano.pushWhiteKey(id, e.key);
   } 
   else {
-    piano.pushBlackKey(getIdForBlackKey(e.key));
-    recorder.addNoteToRecord(e.key);
+    piano.pushBlackKey(getIdForBlackKey(e.key), e.key);
   }
   piano.refresh();
 }
