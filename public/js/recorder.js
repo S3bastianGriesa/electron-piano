@@ -40,9 +40,14 @@ recorder.finishRecord = function finishRecord() {
 
 recorder.play = function play() {
   for (var i = 0; i < recorder.currentRecord.notes.length; i++) {
-    window.setTimeout(function (note) {
-      recorder.throwKeyEvent(note.key);
-    }, recorder.currentRecord.notes[i].time, recorder.currentRecord.notes[i]);
+    window.setTimeout(function (note, final) {
+      if (recorder.isPlaying) {
+        recorder.throwKeyEvent(note.key);
+        if (final) {
+          stopPlay();
+        }
+      }  
+    }, recorder.currentRecord.notes[i].time, recorder.currentRecord.notes[i], (i === recorder.currentRecord.notes.length -1));
 
   }  
 }

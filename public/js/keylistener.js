@@ -2,21 +2,21 @@ window.onkeydown = function (e) {
   var id = getIdForWhiteKey(e.key);
   //start recording  
   if (e.key === 'a') {
-    if(!recorder.isBusy())
-      recorder.startNewRecord();
+    if (!recorder.isBusy())
+      startRecord();
     return;
 
   }
 
   if (e.key === 'f') {
-    recorder.finishRecord();
+    stopRecord();
     console.log(recorder.currentRecord);
     return;
   }
 
   if (e.key === 'k') {
-    if(!recorder.isBusy())
-      recorder.play();
+    if (!recorder.isBusy())
+      play();
     return;
   }
 

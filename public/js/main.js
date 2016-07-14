@@ -51,6 +51,33 @@ function createAudioNoteMap (instrument) {
   return audioNoteMap;
 }
 
+  function startRecord() {
+    var rec = $('#record');
+    rec.text('Stop(f)');
+    recorder.startNewRecord();
+  }
+
+  function stopRecord() {
+    var rec = $('#record');
+    rec.text('Record(a)');
+    recorder.finishRecord();
+  }
+
+  function play() {
+    var play = $('#play');
+    if (!recorder.isPlaying) {
+      play.text('Stop');
+      recorder.play();
+      recorder.isPlaying = true;
+    }
+  }
+
+  function stopPlay() {
+    var play = $('#play');
+    play.text('Play(k)');
+    recorder.isPlaying = false;
+  }
+
 $(document).ready(function () {
   
   var audioNoteMap = createAudioNoteMap('piano');
@@ -59,6 +86,15 @@ $(document).ready(function () {
   recorder.initialize();
   piano.initialize(40, 200, 1110, 250, 14, audioNoteMap);
   piano.draw();
+  
+  $('#record').click(function(event) {
+    if (!recorder.isRecording) {
+
+    }
+    else {
+
+    }
+  });
 
   $('#nextOctave').click(function(event) {
     var nextOctave = piano.currentOctave + 1;
