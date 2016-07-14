@@ -23,7 +23,8 @@ recorder.startNewRecord = function startNewRecord() {
 recorder.addNoteToRecord = function addNoteToRecord(note) {
   var newNote = {
     value: note,
-    time: new Date().getTime() - recorder.currentRecord.startTime,
+    key: recorder.lastKey,
+    time: new Date().getTime() - recorder.currentRecord.startTime
   };
   if(recorder.isRecording)
   recorder.currentRecord.notes.push(newNote);
@@ -46,6 +47,10 @@ recorder.play = function play() {
         audio.currentTime = 0;
         audio.play();
         console.log(note);
+        jQuery.event.trigger({ type: 'keydown', which: note.key.charCodeAt(0), key: note.key });
+        window.setTimeout(function (key) {
+          jQuery.event.trigger({ type: 'keyup', which: key.charCodeAt(0), key: key });
+        }, 200, note.key);   
       }
     }, recorder.currentRecord.notes[i].time, recorder.currentRecord.notes[i]);
 

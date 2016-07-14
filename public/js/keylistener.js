@@ -1,6 +1,6 @@
 window.onkeydown = function (e) {
   var id = getIdForWhiteKey(e.key);
-
+  recorder.lastKey = e.key;
   //start recording  
   if (e.key === 'a') {
     if(!recorder.isBusy())
