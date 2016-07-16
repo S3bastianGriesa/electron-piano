@@ -21,12 +21,13 @@ recorder.startNewRecord = function startNewRecord() {
 }
 
 recorder.addNoteToRecord = function addNoteToRecord(key) {
-  var newNote = {
-    key: key,
-    time: new Date().getTime() - recorder.currentRecord.startTime
-  };
-  if(recorder.isRecording)
-  recorder.currentRecord.notes.push(newNote);
+  if (recorder.isRecording) {
+    var newNote = {
+      key: key,
+      time: new Date().getTime() - recorder.currentRecord.startTime
+    };
+    recorder.currentRecord.notes.push(newNote);
+  }
 }
 
 recorder.finishRecord = function finishRecord() {
