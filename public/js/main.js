@@ -86,6 +86,15 @@ $(document).ready(function () {
   recorder.initialize();
   piano.initialize(40, 200, 1110, 250, 14, audioNoteMap);
   piano.draw();
+
+  $('#records').click(function (event) {
+    const records = dao.getAllRecords();
+    const select = $('#records');
+    select.empty();
+		$.each(records, function(index, value) {
+			select.append("<option>" + value.name + "</option>");
+		});
+  });
   
   $('#record').click(function(event) {
     if (!recorder.isRecording) {

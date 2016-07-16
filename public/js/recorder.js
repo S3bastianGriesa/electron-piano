@@ -31,13 +31,15 @@ recorder.addNoteToRecord = function addNoteToRecord(key) {
 }
 
 recorder.finishRecord = function finishRecord() {
-  console.log('stop recording');
-  recorder.currentRecord.finishTime = new Date().getTime();
-  recorder.currentRecord.time = recorder.currentRecord.finishTime - recorder.currentRecord.startTime;
-  recorder.records.push(recorder.currentRecord);
-  recorder.isRecording = false;
-  const rec = new Record(new Date().toJSON(), recorder.currentRecord.time, recorder.currentRecord.notes);
-  dao.save(rec);
+  if (recorder.isRecording) {
+    console.log('stop recording');
+    recorder.currentRecord.finishTime = new Date().getTime();
+    recorder.currentRecord.time = recorder.currentRecord.finishTime - recorder.currentRecord.startTime;
+    recorder.records.push(recorder.currentRecord);
+    recorder.isRecording = false;
+    const rec = new Record(new Date().toJSON(), recorder.currentRecord.time, recorder.currentRecord.notes);
+    dao.save(rec);
+  }
 }
 
 recorder.play = function play() {
