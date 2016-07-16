@@ -36,6 +36,8 @@ recorder.finishRecord = function finishRecord() {
   recorder.currentRecord.time = recorder.currentRecord.finishTime - recorder.currentRecord.startTime;
   recorder.records.push(recorder.currentRecord);
   recorder.isRecording = false;
+  const rec = new Record(new Date().toJSON(), recorder.currentRecord.time, recorder.currentRecord.notes);
+  dao.save(rec);
 }
 
 recorder.play = function play() {
