@@ -43,6 +43,11 @@ recorder.finishRecord = function finishRecord() {
 }
 
 recorder.play = function play() {
+  const selectedRecord = $("#records option:selected").text();
+  const rec = dao.loadRecord(selectedRecord);
+  recorder.currentRecord = {};
+  recorder.currentRecord.time = rec.length;
+  recorder.currentRecord.notes = rec.notes;
   for (var i = 0; i < recorder.currentRecord.notes.length; i++) {
     window.setTimeout(function (note, final) {
       if (recorder.isPlaying) {
